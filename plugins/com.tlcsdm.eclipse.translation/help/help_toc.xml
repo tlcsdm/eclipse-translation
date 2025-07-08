@@ -1,0 +1,7 @@
+<toc label="Eclipse Minimap"> 
+  <topic label="Introduction" href="help/01_introduction.html"/> 
+  <topic label="Files and Folders" href="help/02_resource_views.html"/> 
+  <topic label="Editors" href="help/03_editors.html"/> 
+  <topic label="Tool bar" href="help/04_toolbar.html"/>
+  <topic label="Preference Page" href="help/05_preferences.html"/> 
+</toc>

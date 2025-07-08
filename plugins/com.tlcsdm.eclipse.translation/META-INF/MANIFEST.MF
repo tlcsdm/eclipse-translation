@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Automatic-Module-Name: com.tlcsdm.eclipse.translation
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.tlcsdm.eclipse.translation;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.tlcsdm.eclipse.translation.Activator
+Bundle-Vendor: %providerName
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.jface.text,
+ org.eclipse.ui.workbench.texteditor
+Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-17
