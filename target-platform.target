@@ -5,6 +5,8 @@
         <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
             <repository location="https://mirrors.aliyun.com/eclipse/releases/2024-06/"/>
             <unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+            <unit id="com.google.gson" version="0.0.0"/>
+            <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
         </location>
     </locations>
 </target>
