@@ -29,14 +29,10 @@
    
     <extension
          point="org.eclipse.ui.views">
-      <category
-            name="Translation Category"
-            id="com.tlcsdm.eclipse.translation.views.category">
-      </category>
       <view
             name="Translation View"
             icon="icons/sample.gif"
-            category="com.tlcsdm.eclipse.translation.views.category"
+            category="org.eclipse.pde.ui"
             class="com.tlcsdm.eclipse.translation.views.TranslationView"
             id="com.tlcsdm.eclipse.translation.views.TranslationView">
       </view>

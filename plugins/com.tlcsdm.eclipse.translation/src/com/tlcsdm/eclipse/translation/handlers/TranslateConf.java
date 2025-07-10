@@ -24,5 +24,9 @@ public class TranslateConf {
 	 * 英文
 	 */
 	public static final String EN = "en";
+	/**
+	 * 日文
+	 */
+	public static final String JA = "ja";
 
 }

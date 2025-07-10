@@ -17,6 +17,7 @@ import org.eclipse.swt.custom.StyledText;
 import com.tlcsdm.eclipse.translation.Activator;
 import com.tlcsdm.eclipse.translation.baidu.BaiduTranslateImpl;
 import com.tlcsdm.eclipse.translation.baidu.BaiduTranslateModel;
+import com.tlcsdm.eclipse.translation.preferences.TranslatePreferencePage;
 import com.tlcsdm.eclipse.translation.views.TranslationView;
 import com.tlcsdm.eclipse.translation.youdao.YoudaoTranslate;
 import com.tlcsdm.eclipse.translation.youdao.YoudaoTranslateImpl;
@@ -96,11 +97,11 @@ public class KeyHandler extends AbstractHandler {
 	 * 初始化所需要的key
 	 */
 	public void initKey() {
-		TranslateConf.TRANSLATEPLATFORM = store.getString("TRANSLATE_PLATFORM");
-		TranslateConf.BAIDU_APP_ID = store.getString("APP_ID");
-		TranslateConf.BAIDU_SECURITY_KEY = store.getString("SECURITY_KEY");
-		TranslateConf.YOUDAO_KEY = store.getString("YOUDAO_KEY");
-		TranslateConf.YOUDAO_KEYFROM = store.getString("YOUDAO_KEYFROM");
+		TranslateConf.TRANSLATEPLATFORM = store.getString(TranslatePreferencePage.TRANSLATE_PLATFORM);
+		TranslateConf.BAIDU_APP_ID = store.getString(TranslatePreferencePage.APP_ID);
+		TranslateConf.BAIDU_SECURITY_KEY = store.getString(TranslatePreferencePage.SECURITY_KEY);
+		TranslateConf.YOUDAO_KEY = store.getString(TranslatePreferencePage.YOUDAO_KEY);
+		TranslateConf.YOUDAO_KEYFROM = store.getString(TranslatePreferencePage.YOUDAO_KEYFROM);
 	}
 
 	/**

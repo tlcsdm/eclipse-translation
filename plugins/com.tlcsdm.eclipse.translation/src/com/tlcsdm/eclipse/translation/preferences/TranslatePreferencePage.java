@@ -10,11 +10,11 @@ import com.tlcsdm.eclipse.translation.Activator;
 
 public class TranslatePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	public static final String APP_ID = "APP_ID";
-	public static final String SECURITY_KEY = "SECURITY_KEY";
-	public static final String TRANSLATE_PLATFORM = "TRANSLATE_PLATFORM";
-	public static final String YOUDAO_KEY = "YOUDAO_KEY";
-	public static final String YOUDAO_KEYFROM = "YOUDAO_KEYFROM";
+	public static final String APP_ID = "com.tlcsdm.eclipse.translation.baidu.APP_ID";
+	public static final String SECURITY_KEY = "com.tlcsdm.eclipse.translation.baidu.SECURITY_KEY";
+	public static final String TRANSLATE_PLATFORM = "com.tlcsdm.eclipse.translation.TRANSLATE_PLATFORM";
+	public static final String YOUDAO_KEY = "com.tlcsdm.eclipse.translation.youdao.YOUDAO_KEY";
+	public static final String YOUDAO_KEYFROM = "com.tlcsdm.eclipse.translation.youdao.YOUDAO_KEYFROM";
 
 	public TranslatePreferencePage() {
 		super(GRID);
