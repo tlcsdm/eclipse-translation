@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-
-	<extension point="org.eclipse.ui.preferencePages">
-       <page
+    <extension point="org.eclipse.ui.preferencePages">
+        <page
             class="com.tlcsdm.eclipse.translation.preferences.TranslatePreferencePage"
             id="com.tlcsdm.eclipse.translation.preferences.translatePreferencePage"
-            name="Translation">
-       </page>
-	</extension>
-
-	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer
-			class="com.tlcsdm.eclipse.translation.preferences.PreferenceInitializer">
-		</initializer>
-	</extension>
-	
-	<extension point="org.eclipse.help.toc">
-		<toc file="help/help_toc.xml" primary="true"/>
-	</extension>
-	   <extension
+            name="Translation"></page>
+    </extension>
+    <extension point="org.eclipse.core.runtime.preferences">
+        <initializer
+			class="com.tlcsdm.eclipse.translation.preferences.PreferenceInitializer"></initializer>
+    </extension>
+    <extension point="org.eclipse.help.toc">
+        <toc file="help/help_toc.xml" primary="true"/>
+    </extension>
+    <extension
           point="org.eclipse.help.contexts">
-      <contexts
+        <contexts
             file="help/help_contexts.xml"
-            plugin="com.tlcsdm.eclipse.translation">
-      </contexts>
-   </extension>
-   
+            plugin="com.tlcsdm.eclipse.translation"></contexts>
+    </extension>
     <extension
          point="org.eclipse.ui.views">
-      <view
+        <view
             name="Translation View"
             icon="icons/sample.gif"
             inject="true"
             category="org.eclipse.pde.ui"
             class="com.tlcsdm.eclipse.translation.views.TranslationView"
-            id="com.tlcsdm.eclipse.translation.views.TranslationView">
-      </view>
-   </extension>
-   
-   <extension
+            id="com.tlcsdm.eclipse.translation.views.TranslationView"></view>
+    </extension>
+    <extension
          point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
+        <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaPerspective">
-         <view
+            <view
                ratio="0.5"
                relative="org.eclipse.ui.views.ProblemView"
                relationship="right"
-               id="com.tlcsdm.eclipse.translation.views.TranslationView">
-         </view>
-      </perspectiveExtension>
-   </extension> 
+               id="com.tlcsdm.eclipse.translation.views.TranslationView"></view>
+        </perspectiveExtension>
+    </extension>
+
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+			locationURI="toolbar:org.eclipse.ui.trim.status">
+            <toolbar id="com.tlcsdm.eclipse.translation.toolbar">
+                <separator
+					name="com.tlcsdm.eclipse.translation.group.separator"
+					visible="true" />
+                <control
+						class="com.tlcsdm.eclipse.translation.handlers.TranslateComboWithIcon"
+						id="com.tlcsdm.eclipse.translation.status.combo" />
+            </toolbar>
+        </menuContribution>
+    </extension>
 
 </plugin>

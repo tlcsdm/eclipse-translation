@@ -25,4 +25,7 @@ public class TranslateConf {
 	 */
 	public static final String JA = "ja";
 
+	public static final String[][] TRANSLATE_PLATFORM_LIST = new String[][] { { "百度翻译", "baidu" },
+			{ "有道翻译", "youdao" } };
+
 }
