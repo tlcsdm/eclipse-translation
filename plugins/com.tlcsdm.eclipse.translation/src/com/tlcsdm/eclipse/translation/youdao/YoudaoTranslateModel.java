@@ -12,7 +12,6 @@ import com.google.gson.reflect.TypeToken;
 public class YoudaoTranslateModel {
 
 	private List<String> translation = new ArrayList<String>();
-	private String query = "";
 	private Basic basic = new Basic();
 	private Web web = new Web();
 
@@ -20,13 +19,13 @@ public class YoudaoTranslateModel {
 		Gson gson = new Gson();
 		Type type = new TypeToken<Map<String, Object>>() {
 		}.getType();
+
 		Map<String, Object> map = gson.fromJson(text, type);
 		// System.out.println(map);
 		if ("0".equals(map.get("errorCode").toString())) {
 			Type type1 = new TypeToken<List<String>>() {
 			}.getType();
 			translation = gson.fromJson(map.get("translation").toString(), type1);
-			query = map.get("query").toString();
 			if (map.get("basic") != null) {
 				Map<String, Object> basicMap = gson.fromJson(map.get("basic").toString(), type);
 				if (basicMap.get("phonetic") != null)
@@ -44,14 +43,11 @@ public class YoudaoTranslateModel {
 				web.webList = gson.fromJson(map.get("web").toString(), type2);
 				web.value = true;
 			}
-		} else {
-			query = "errorCode=" + map.get("errorCode").toString();
 		}
 	}
 
 	public String printResult() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("原文：").append(query).append("\r").append("译文：");
 		for (Object o : translation) {
 			sb.append(o).append("\r");
 		}

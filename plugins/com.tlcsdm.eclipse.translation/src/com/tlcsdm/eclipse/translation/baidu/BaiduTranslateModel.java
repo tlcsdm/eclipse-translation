@@ -83,19 +83,15 @@ public class BaiduTranslateModel {
 		Type type = new TypeToken<Map<String, Object>>() {
 		}.getType();
 		Map<String, Object> map = gson.fromJson(result, type);
-		// System.out.println(result);
 		this.from = map.get("from").toString();
 		this.to = map.get("to").toString();
-		String trans_result = map.get("trans_result").toString();
-		// System.out.println(trans_result);
-		Type types = new TypeToken<List<Map<String, Object>>>() {
-		}.getType();
-		List<Map<String, Object>> resultList = gson.fromJson(trans_result, types);
-		for (Map<String, Object> map2 : resultList) {
-			this.src = this.src + map2.get("src").toString() + "\r";
-			this.dst = this.dst + map2.get("dst").toString() + "\r";
-		}
 
+		@SuppressWarnings("unchecked")
+		List<Map<String, String>> transResult = (List<Map<String, String>>) map.get("trans_result");
+		for (Map<String, String> item : transResult) {
+			this.src = this.src + item.get("src").toString() + "\r";
+			this.dst = this.dst + item.get("dst").toString() + "\r";
+		}
 	}
 
 }

@@ -10,7 +10,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	@Override
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		store.setDefault(TranslatePreferencePage.TRANSLATE_PLATFORM, "all");
+		store.setDefault(TranslatePreferencePage.TRANSLATE_PLATFORM, "baidu");
 		store.setDefault(TranslatePreferencePage.APP_ID, "");
 		store.setDefault(TranslatePreferencePage.SECURITY_KEY, "");
 		store.setDefault(TranslatePreferencePage.YOUDAO_KEY, "");

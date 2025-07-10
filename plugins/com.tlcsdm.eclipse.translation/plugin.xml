@@ -32,6 +32,7 @@
       <view
             name="Translation View"
             icon="icons/sample.gif"
+            inject="true"
             category="org.eclipse.pde.ui"
             class="com.tlcsdm.eclipse.translation.views.TranslationView"
             id="com.tlcsdm.eclipse.translation.views.TranslationView">
@@ -49,35 +50,6 @@
                id="com.tlcsdm.eclipse.translation.views.TranslationView">
          </view>
       </perspectiveExtension>
-   </extension>
-   
-   <extension
-         point="org.eclipse.ui.commands">
-      <category
-            name="Translation Category"
-            id="com.tlcsdm.eclipse.translation.commands.category">
-      </category>
-      <command
-            name="Translation Command"
-            categoryId="com.tlcsdm.eclipse.translation.commands.category"
-            id="com.tlcsdm.eclipse.translation.commands.sampleCommand">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            commandId="com.tlcsdm.eclipse.translation.commands.sampleCommand"
-            class="com.tlcsdm.eclipse.translation.handlers.KeyHandler">
-      </handler>
-   </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="com.tlcsdm.eclipse.translation.commands.sampleCommand"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+M2+C"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
-      </key>
-   </extension>
+   </extension> 
 
 </plugin>

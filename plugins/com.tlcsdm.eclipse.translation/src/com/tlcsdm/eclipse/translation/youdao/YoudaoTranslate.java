@@ -2,6 +2,6 @@ package com.tlcsdm.eclipse.translation.youdao;
 
 public interface YoudaoTranslate {
 
-	public String translate(String src);
+	public String translate(String src, String from, String to);
 
 }
