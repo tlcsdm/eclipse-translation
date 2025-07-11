@@ -11,7 +11,7 @@ This plugin integrates translation capabilities into the Eclipse IDE.
 
 ## Use
 1. Translate selected text via context menu or keyboard shortcut  
-shortcut: Ctrl + Shift + Y  
+shortcut: Ctrl + Alt + T   
 ![screenshot](https://raw.github.com/tlcsdm/eclipse-translation/master/plugins/com.tlcsdm.eclipse.translation/help/images/popup.png)
 
 2. Translation View  
