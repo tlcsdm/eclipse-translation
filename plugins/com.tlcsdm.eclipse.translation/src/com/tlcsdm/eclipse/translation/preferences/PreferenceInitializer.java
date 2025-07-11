@@ -23,8 +23,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
 		String orgName = getWindowsOrganization();
+		String owner = getWindowsOwner();
 		// For Renesas
-		if (isWindows && orgName != null && orgName.toLowerCase().contains("renesas")) {
+		if (isWindows && ((orgName != null && orgName.toLowerCase().contains("renesas"))
+				|| (owner != null && owner.toLowerCase().contains("rdb")))) {
 			SecretKey key = AesUtil.getFixedKey(FIXED_KEY_STR);
 			String encryptedAppid = "z4D6WMgA05oqGSSBRGNafqybEiVNBqlLEdVme+oCuMo=";
 			String encryptedSecurityKey = "pLCaiVPwwHEmYdjoVrHNCZ9F5Kpr8oj67F2efi76RtM=";
@@ -49,6 +51,15 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		try {
 			return Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE,
 					"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", "RegisteredOrganization");
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private String getWindowsOwner() {
+		try {
+			return Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE,
+					"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", "RegisteredOwner");
 		} catch (Exception e) {
 			return null;
 		}
