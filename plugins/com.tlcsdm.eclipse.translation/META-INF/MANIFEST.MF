@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.google.gson,
  org.eclipse.jface.text,
+ org.eclipse.core.expressions,
  org.eclipse.jdt.ui;resolution:=optional,
  org.eclipse.pde.ui;resolution:=optional,
  org.eclipse.ui.workbench.texteditor;resolution:=optional
