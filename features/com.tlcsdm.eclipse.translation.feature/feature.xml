@@ -305,6 +305,8 @@ version(s), and exceptions or additional permissions here}.&quot;
       <import plugin="com.google.gson"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.core.expressions"/>
+      <import plugin="com.sun.jna"/>
+      <import plugin="com.sun.jna.platform"/>
       <import plugin="org.eclipse.jdt.ui"/>
       <import plugin="org.eclipse.ui.workbench.texteditor"/>
       <import plugin="org.eclipse.pde.ui"/>

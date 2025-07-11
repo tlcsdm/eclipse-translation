@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <contexts>
-   <context id="prefs_openexplorer" title="Eclipse Minimap">
-      <description>Minimap preference page</description>
-      <topic href="help/05_preferences.html" label="Preferences - Open Explorer"/>
+   <context id="prefs_translation" title="Eclipse Translation">
+      <description>Translation preference page</description>
+      <topic href="help/05_preferences.html" label="Preferences - Translation"/>
    </context>
 </contexts>

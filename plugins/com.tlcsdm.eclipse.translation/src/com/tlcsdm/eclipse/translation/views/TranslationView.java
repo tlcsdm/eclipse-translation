@@ -23,6 +23,7 @@ import org.eclipse.ui.part.ViewPart;
 import com.tlcsdm.eclipse.translation.Activator;
 import com.tlcsdm.eclipse.translation.handlers.TranslateConf;
 import com.tlcsdm.eclipse.translation.preferences.TranslatePreferencePage;
+import com.tlcsdm.eclipse.translation.utils.Messages;
 import com.tlcsdm.eclipse.translation.utils.TranslationUtil;
 
 public class TranslationView extends ViewPart implements ModifyListener {
@@ -37,10 +38,10 @@ public class TranslationView extends ViewPart implements ModifyListener {
 
 	public TranslationView() {
 		super();
-		mTranslationModelDataSource.add(Map.of(TranslateConf.AUTO, "自动检测"));
+		mTranslationModelDataSource.add(Map.of(TranslateConf.AUTO, Messages.translateConf_auto));
 		mTranslationModelDataSource.add(Map.of(TranslateConf.ZH, "中文"));
-		mTranslationModelDataSource.add(Map.of(TranslateConf.JA, "日文"));
-		mTranslationModelDataSource.add(Map.of(TranslateConf.EN, "英文"));
+		mTranslationModelDataSource.add(Map.of(TranslateConf.JA, "日本語"));
+		mTranslationModelDataSource.add(Map.of(TranslateConf.EN, "English"));
 	}
 
 	@Override
@@ -49,14 +50,14 @@ public class TranslationView extends ViewPart implements ModifyListener {
 
 		cboTranslationModelFrom = new Combo(parent, SWT.READ_ONLY);
 		cboTranslationModelFrom.addModifyListener(this);
-		cboTranslationModelFrom.setToolTipText("源语言");
+		cboTranslationModelFrom.setToolTipText(Messages.view_from);
 		cboTranslationModelFrom.setItems(getTranslationModelItems());
 		cboTranslationModelFrom.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		cboTranslationModelFrom.select(0);
 
 		cboTranslationModelTo = new Combo(parent, SWT.READ_ONLY);
 		cboTranslationModelTo.addModifyListener(this);
-		cboTranslationModelTo.setToolTipText("目标语言");
+		cboTranslationModelTo.setToolTipText(Messages.view_to);
 		cboTranslationModelTo.setItems(getTranslationModelItems());
 		cboTranslationModelTo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		cboTranslationModelTo.select(1);
@@ -69,7 +70,7 @@ public class TranslationView extends ViewPart implements ModifyListener {
 			}
 		});
 		btnTranslation.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1));
-		btnTranslation.setText("翻译");
+		btnTranslation.setText(Messages.view_btn_translate);
 
 		btnCheckAuto = new Button(parent, SWT.CHECK);
 		btnCheckAuto.setSelection(true);
@@ -80,7 +81,7 @@ public class TranslationView extends ViewPart implements ModifyListener {
 			}
 		});
 		btnCheckAuto.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, false, 1, 1));
-		btnCheckAuto.setText("实时翻译");
+		btnCheckAuto.setText(Messages.view_auto_translate);
 
 		textQuery = new Text(parent, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 		textQuery.addModifyListener(this);

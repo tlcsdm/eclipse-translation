@@ -11,6 +11,8 @@ Require-Bundle: org.eclipse.ui,
  com.google.gson,
  org.eclipse.jface.text,
  org.eclipse.core.expressions,
+ com.sun.jna,
+ com.sun.jna.platform,
  org.eclipse.jdt.ui;resolution:=optional,
  org.eclipse.pde.ui;resolution:=optional,
  org.eclipse.ui.workbench.texteditor;resolution:=optional
