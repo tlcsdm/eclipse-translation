@@ -2,7 +2,6 @@ package com.tlcsdm.eclipse.translation.preferences;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
-import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -31,10 +30,10 @@ public class TranslatePreferencePage extends FieldEditorPreferencePage implement
 	public void createFieldEditors() {
 		addField(new RadioGroupFieldEditor(TRANSLATE_PLATFORM, "选择翻译平台，请注意你选择的平台必须填写授权的id和key，若勾选全部，请全部填写。", 1,
 				TranslateConf.TRANSLATE_PLATFORM_LIST, getFieldEditorParent()));
-		addField(new StringFieldEditor(APP_ID, "百度翻译的APP_ID:", getFieldEditorParent()));
-		addField(new StringFieldEditor(SECURITY_KEY, "百度翻译的SECURITY_KEY:", getFieldEditorParent()));
-		addField(new StringFieldEditor(YOUDAO_KEY, "有道翻译的KEY:", getFieldEditorParent()));
-		addField(new StringFieldEditor(YOUDAO_KEYFROM, "有道翻译的KEYFROM:", getFieldEditorParent()));
+		addField(new PasswordFieldEditor(APP_ID, "百度翻译的APP_ID:", getFieldEditorParent()));
+		addField(new PasswordFieldEditor(SECURITY_KEY, "百度翻译的SECURITY_KEY:", getFieldEditorParent()));
+		addField(new PasswordFieldEditor(YOUDAO_KEY, "有道翻译的KEY:", getFieldEditorParent()));
+		addField(new PasswordFieldEditor(YOUDAO_KEYFROM, "有道翻译的KEYFROM:", getFieldEditorParent()));
 
 	}
 
