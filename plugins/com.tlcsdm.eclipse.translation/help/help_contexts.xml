@@ -2,6 +2,6 @@
 <contexts>
    <context id="prefs_translation" title="Eclipse Translation">
       <description>Translation preference page</description>
-      <topic href="help/05_preferences.html" label="Preferences - Translation"/>
+      <topic href="help/02_preferences.html" label="Preferences - Translation"/>
    </context>
 </contexts>

@@ -52,7 +52,7 @@ public class TranslatePreferencePage extends FieldEditorPreferencePage implement
 				MessageDialog.openError(parent.getShell(), "Failed to open link.", ex.getMessage());
 			}
 		});
-
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(parent, Activator.PLUGIN_ID + ".prefs_translation");
 		return composite;
 	}
 
