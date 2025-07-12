@@ -52,9 +52,7 @@ public class TranslatePopupHandler extends AbstractHandler {
 			int length = textSelection.getLength();
 			int endOffset = startOffset + length;
 
-			int lineIndex = styledText.getLineAtOffset(endOffset);
-			int lineOffset = styledText.getOffsetAtLine(lineIndex);
-			Point location = styledText.getLocationAtOffset(lineOffset);
+			Point location = styledText.getLocationAtOffset(endOffset);
 			Point displayLocation = styledText.toDisplay(location);
 
 			// 若已有弹窗，先关闭
@@ -74,18 +72,31 @@ public class TranslatePopupHandler extends AbstractHandler {
 			popupText.setCaret(null);
 
 			// 设置弹窗尺寸
-			int width = 300;
-			int height = 100;
+			popupShell.pack(); // 自动布局子控件
+
+			// 计算推荐尺寸（带最大宽高限制）
+			Point preferredSize = popupShell.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+			int maxWidth = 500;
+			int maxHeight = 300;
+			int minWidth = 300;
+			int minHeight = 100;
+
+			int width = Math.max(minWidth, Math.min(preferredSize.x, maxWidth));
+			int height = Math.max(Math.min(preferredSize.y, maxHeight), minHeight);
 			popupShell.setSize(width, height);
+
+			// 获取行高与坐标
 			int lineHeight = styledText.getLineHeight(endOffset);
-
 			Rectangle displayBounds = styledText.getDisplay().getBounds();
-			int x = displayLocation.x;
-			int y = displayLocation.y + lineHeight;
 
+			int x = displayLocation.x;
+			int y = displayLocation.y + lineHeight / 2; // 更紧凑地显示在所选文本下方
+
+			// 如果下方空间不足则显示在上方
 			if (y + height > displayBounds.height) {
-				y = displayLocation.y - height - 5; // 显示在上方
+				y = displayLocation.y - height - 5;
 			}
+
 			popupShell.setLocation(x, y);
 			popupShell.open();
 
