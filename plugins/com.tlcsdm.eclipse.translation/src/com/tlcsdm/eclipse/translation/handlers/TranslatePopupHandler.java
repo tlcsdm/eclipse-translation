@@ -8,7 +8,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -48,7 +47,27 @@ public class TranslatePopupHandler extends AbstractHandler {
 			}
 
 			// 获取文本区域位置，计算弹窗坐标
-			Point location = styledText.getLocationAtOffset(textSelection.getOffset());
+			int startOffset = textSelection.getOffset();
+			int length = textSelection.getLength();
+			int endOffset = startOffset + length;
+
+			int startLine = styledText.getLineAtOffset(startOffset);
+			int endLine = styledText.getLineAtOffset(endOffset);
+			int numberOfLines = endLine - startLine + 1;
+
+			// 起始字符在控件内部的位置
+			Point startLocation = styledText.getLocationAtOffset(startOffset);
+
+			// 行高（大多数等高字体里相等）
+			int lineHeight = styledText.getLineHeight(startOffset);
+			int selectionHeight = numberOfLines * lineHeight;
+
+			// 计算最终位置
+			int x = startLocation.x;
+			int y = startLocation.y + selectionHeight + 5; // 显示在选区下方偏移一点
+
+			// 转为屏幕坐标
+			Point displayLocation = styledText.toDisplay(x, y);
 
 			// 若已有弹窗，先关闭
 			if (popupShell != null && !popupShell.isDisposed()) {
@@ -79,28 +98,7 @@ public class TranslatePopupHandler extends AbstractHandler {
 			int width = Math.max(minWidth, Math.min(preferredSize.x, maxWidth));
 			int height = Math.max(Math.min(preferredSize.y, maxHeight), minHeight);
 			popupShell.setSize(width, height);
-
-			int startOffset = textSelection.getOffset();
-			int length = textSelection.getLength();
-			int endOffset = startOffset + length;
-
-			// 获取起始行和结束行
-			int startLine = styledText.getLineAtOffset(startOffset);
-			int endLine = styledText.getLineAtOffset(endOffset);
-
-			// 计算选择区域高度
-			int numberOfLines = endLine - startLine + 1;
-			int lineHeight = styledText.getLineHeight(startOffset);
-			int selectionHeight = numberOfLines * lineHeight;
-			int x = location.x;
-			int y = location.y + selectionHeight + 5; // 5 为偏移距离，美观用
-			// 边界判断：如果弹窗超出屏幕下边缘则改为显示在选区上方
-			Rectangle displayBounds = styledText.getDisplay().getBounds();
-			if (y + height > displayBounds.height) {
-				y = location.y - height - 5;
-			}
-
-			popupShell.setLocation(x, y);
+			popupShell.setLocation(displayLocation.x, displayLocation.y + 20); // 显示在选中文本下方
 			popupShell.open();
 
 			// 自动关闭逻辑：点击窗口外关闭
