@@ -52,7 +52,13 @@ public class TranslatePopupHandler extends AbstractHandler {
 			int length = textSelection.getLength();
 			int endOffset = startOffset + length;
 
-			Point location = styledText.getLocationAtOffset(endOffset);
+			// 获取 endOffset 所在行
+			int endLineIndex = styledText.getLineAtOffset(endOffset);
+			// 获取该行的行尾 offset（不包含换行符）
+			int lineEndOffset = styledText.getOffsetAtLine(endLineIndex) + styledText.getLine(endLineIndex).length();
+
+			// 使用该位置定位弹窗
+			Point location = styledText.getLocationAtOffset(lineEndOffset);
 			Point displayLocation = styledText.toDisplay(location);
 
 			// 若已有弹窗，先关闭
