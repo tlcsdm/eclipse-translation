@@ -8,7 +8,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -48,17 +47,7 @@ public class TranslatePopupHandler extends AbstractHandler {
 			}
 
 			// 获取文本区域位置，计算弹窗坐标
-			int startOffset = textSelection.getOffset();
-			int length = textSelection.getLength();
-			int endOffset = startOffset + length;
-
-			// 获取 endOffset 所在行
-			int endLineIndex = styledText.getLineAtOffset(endOffset);
-			// 获取该行的行尾 offset（不包含换行符）
-			int lineEndOffset = styledText.getOffsetAtLine(endLineIndex) + styledText.getLine(endLineIndex).length();
-
-			// 使用该位置定位弹窗
-			Point location = styledText.getLocationAtOffset(lineEndOffset);
+			Point location = styledText.getLocationAtOffset(textSelection.getOffset());
 			Point displayLocation = styledText.toDisplay(location);
 
 			// 若已有弹窗，先关闭
@@ -67,7 +56,7 @@ public class TranslatePopupHandler extends AbstractHandler {
 			}
 
 			// 创建浮动窗口
-			popupShell = new Shell(styledText.getShell(), SWT.ON_TOP | SWT.TOOL | SWT.BORDER);
+			popupShell = new Shell(styledText.getShell(), SWT.ON_TOP | SWT.TOOL);
 			popupShell.setLayout(new FillLayout());
 
 			StyledText popupText = new StyledText(popupShell, SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
@@ -90,20 +79,7 @@ public class TranslatePopupHandler extends AbstractHandler {
 			int width = Math.max(minWidth, Math.min(preferredSize.x, maxWidth));
 			int height = Math.max(Math.min(preferredSize.y, maxHeight), minHeight);
 			popupShell.setSize(width, height);
-
-			// 获取行高与坐标
-			int lineHeight = styledText.getLineHeight(endOffset);
-			Rectangle displayBounds = styledText.getDisplay().getBounds();
-
-			int x = displayLocation.x;
-			int y = displayLocation.y + lineHeight / 2; // 更紧凑地显示在所选文本下方
-
-			// 如果下方空间不足则显示在上方
-			if (y + height > displayBounds.height) {
-				y = displayLocation.y - height - 5;
-			}
-
-			popupShell.setLocation(x, y);
+			popupShell.setLocation(displayLocation.x, displayLocation.y + 20); // 显示在选中文本下方
 			popupShell.open();
 
 			// 自动关闭逻辑：点击窗口外关闭
