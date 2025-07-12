@@ -58,16 +58,6 @@ public class AesUtil {
 	}
 
 	/**
-	 * 加密（返回 Base64 编码字符串）
-	 */
-	public static String encrypt(String plainText, SecretKey key) throws Exception {
-		Cipher cipher = Cipher.getInstance(AES);
-		cipher.init(Cipher.ENCRYPT_MODE, key);
-		byte[] cipherBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
-		return Base64.getEncoder().encodeToString(cipherBytes);
-	}
-
-	/**
 	 * 解密（Base64 编码字符串 -> 明文）
 	 */
 	public static String decrypt(String cipherText, SecretKey key) {

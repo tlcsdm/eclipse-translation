@@ -17,6 +17,7 @@ import com.tlcsdm.eclipse.translation.preferences.TranslatePreferencePage;
 public class TranslateComboWithIcon extends WorkbenchWindowControlContribution {
 
 	private Image baiduIcon;
+	private Image tencentIcon;
 	private Image youdaoIcon;
 	private Label iconLabel;
 
@@ -24,6 +25,7 @@ public class TranslateComboWithIcon extends WorkbenchWindowControlContribution {
 		super("com.tlcsdm.eclipse.translation.status.combo");
 		baiduIcon = Activator.getImageDescriptor("icons/baidu.png").createImage();
 		youdaoIcon = Activator.getImageDescriptor("icons/youdao.png").createImage();
+		tencentIcon = Activator.getImageDescriptor("icons/tencent.png").createImage();
 	}
 
 	@Override
@@ -109,6 +111,8 @@ public class TranslateComboWithIcon extends WorkbenchWindowControlContribution {
 			iconLabel.setImage(baiduIcon);
 		} else if ("youdao".equals(key)) {
 			iconLabel.setImage(youdaoIcon);
+		} else if ("tencent".equals(key)) {
+			iconLabel.setImage(tencentIcon);
 		} else {
 			iconLabel.setImage(null);
 		}
@@ -126,6 +130,9 @@ public class TranslateComboWithIcon extends WorkbenchWindowControlContribution {
 		}
 		if (youdaoIcon != null && !youdaoIcon.isDisposed()) {
 			youdaoIcon.dispose();
+		}
+		if (tencentIcon != null && !tencentIcon.isDisposed()) {
+			tencentIcon.dispose();
 		}
 		super.dispose();
 	}

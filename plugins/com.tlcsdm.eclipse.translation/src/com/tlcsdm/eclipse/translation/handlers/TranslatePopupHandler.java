@@ -8,6 +8,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -47,7 +48,13 @@ public class TranslatePopupHandler extends AbstractHandler {
 			}
 
 			// 获取文本区域位置，计算弹窗坐标
-			Point location = styledText.getLocationAtOffset(textSelection.getOffset());
+			int startOffset = textSelection.getOffset();
+			int length = textSelection.getLength();
+			int endOffset = startOffset + length;
+
+			int lineIndex = styledText.getLineAtOffset(endOffset);
+			int lineOffset = styledText.getOffsetAtLine(lineIndex);
+			Point location = styledText.getLocationAtOffset(lineOffset);
 			Point displayLocation = styledText.toDisplay(location);
 
 			// 若已有弹窗，先关闭
@@ -56,7 +63,7 @@ public class TranslatePopupHandler extends AbstractHandler {
 			}
 
 			// 创建浮动窗口
-			popupShell = new Shell(styledText.getShell(), SWT.ON_TOP | SWT.TOOL);
+			popupShell = new Shell(styledText.getShell(), SWT.ON_TOP | SWT.TOOL | SWT.BORDER);
 			popupShell.setLayout(new FillLayout());
 
 			StyledText popupText = new StyledText(popupShell, SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
@@ -70,7 +77,16 @@ public class TranslatePopupHandler extends AbstractHandler {
 			int width = 300;
 			int height = 100;
 			popupShell.setSize(width, height);
-			popupShell.setLocation(displayLocation.x, displayLocation.y + 20); // 显示在选中文本下方
+			int lineHeight = styledText.getLineHeight(endOffset);
+
+			Rectangle displayBounds = styledText.getDisplay().getBounds();
+			int x = displayLocation.x;
+			int y = displayLocation.y + lineHeight;
+
+			if (y + height > displayBounds.height) {
+				y = displayLocation.y - height - 5; // 显示在上方
+			}
+			popupShell.setLocation(x, y);
 			popupShell.open();
 
 			// 自动关闭逻辑：点击窗口外关闭

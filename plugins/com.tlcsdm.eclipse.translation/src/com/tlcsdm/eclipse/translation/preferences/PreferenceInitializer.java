@@ -20,6 +20,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		String securityKey = "";
 		String youdaoKey = "";
 		String youdaoKeyFrom = "";
+		String tencentId = "";
+		String tencentKey = "";
 
 		boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
 		String orgName = getWindowsOrganization();
@@ -32,11 +34,15 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			String encryptedSecurityKey = "pLCaiVPwwHEmYdjoVrHNCZ9F5Kpr8oj67F2efi76RtM=";
 			String encryptedYoudaoKey = "IHSJRGQRqkI2lzu1380mIJALGp4btT8KBDhlV7BMvk4=";
 			String encryptedYoudaoKeyFrom = "gUcJvEwI5MAmMtiUATqVOeXn+c/u2ybsiunw6yRmI3mQCxqeG7U/CgQ4ZVewTL5O";
+			String encryptedTencentId = "d0PTAhGjpu0wF3x3aJlE0WvxLvYmXKS2j02fI/DkBv5ADE1J+8qttA9jzCG02z7F";
+			String encryptedTencentKey = "gQo+pcjaKpsWjbmGIAdqU2LinN4tuE1waV8CAo8a+uWQCxqeG7U/CgQ4ZVewTL5O";
 
 			appid = AesUtil.decrypt(encryptedAppid, key);
 			securityKey = AesUtil.decrypt(encryptedSecurityKey, key);
 			youdaoKey = AesUtil.decrypt(encryptedYoudaoKey, key);
 			youdaoKeyFrom = AesUtil.decrypt(encryptedYoudaoKeyFrom, key);
+			tencentId = AesUtil.decrypt(encryptedTencentId, key);
+			tencentKey = AesUtil.decrypt(encryptedTencentKey, key);
 		}
 
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
@@ -45,6 +51,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(TranslatePreferencePage.SECURITY_KEY, securityKey);
 		store.setDefault(TranslatePreferencePage.YOUDAO_KEY, youdaoKey);
 		store.setDefault(TranslatePreferencePage.YOUDAO_KEYFROM, youdaoKeyFrom);
+		store.setDefault(TranslatePreferencePage.TENCENT_ID, tencentId);
+		store.setDefault(TranslatePreferencePage.TENCENT_KEY, tencentKey);
 	}
 
 	private String getWindowsOrganization() {

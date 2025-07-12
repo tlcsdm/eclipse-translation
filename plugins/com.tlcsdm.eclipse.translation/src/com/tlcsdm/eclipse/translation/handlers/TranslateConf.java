@@ -9,6 +9,8 @@ public class TranslateConf {
 	public static String BAIDU_SECURITY_KEY = "";
 	public static String YOUDAO_KEYFROM = "";
 	public static String YOUDAO_KEY = "";
+	public static String TENCENT_SECURITY_ID = "";
+	public static String TENCENT_SECURITY_KEY = "";
 
 	/**
 	 * 自动检测
@@ -28,6 +30,6 @@ public class TranslateConf {
 	public static final String JA = "ja";
 
 	public static final String[][] TRANSLATE_PLATFORM_LIST = new String[][] { { Messages.platform_baidu, "baidu" },
-			{ Messages.platform_youdao, "youdao" } };
+			{ Messages.platform_tencent, "tencent" }, { Messages.platform_youdao, "youdao" } };
 
 }

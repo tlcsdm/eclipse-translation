@@ -15,8 +15,11 @@ public class Messages extends NLS {
 	public static String pref_baidu_key;
 	public static String pref_youdao_id;
 	public static String pref_youdao_key;
+	public static String pref_tencent_id;
+	public static String pref_tencent_key;
 
 	public static String platform_baidu;
+	public static String platform_tencent;
 	public static String platform_youdao;
 
 	public static String translateConf_auto;
