@@ -48,7 +48,7 @@ public class TranslatePopupHandler extends AbstractHandler {
 
 			// 获取文本区域位置，计算弹窗坐标
 			Point location = styledText.getLocationAtOffset(textSelection.getOffset());
-			Point displayLocation = styledText.toControl(location);
+			Point displayLocation = styledText.toDisplay(location);
 
 			// 若已有弹窗，先关闭
 			if (popupShell != null && !popupShell.isDisposed()) {
@@ -67,8 +67,17 @@ public class TranslatePopupHandler extends AbstractHandler {
 			popupText.setCaret(null);
 
 			// 设置弹窗尺寸
-			int width = 300;
-			int height = 100;
+			popupShell.pack(); // 自动布局子控件
+
+			// 计算推荐尺寸（带最大宽高限制）
+			Point preferredSize = popupShell.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+			int maxWidth = 500;
+			int maxHeight = 300;
+			int minWidth = 300;
+			int minHeight = 100;
+
+			int width = Math.max(minWidth, Math.min(preferredSize.x, maxWidth));
+			int height = Math.max(Math.min(preferredSize.y, maxHeight), minHeight);
 			popupShell.setSize(width, height);
 			popupShell.setLocation(displayLocation.x, displayLocation.y + 20); // 显示在选中文本下方
 			popupShell.open();
