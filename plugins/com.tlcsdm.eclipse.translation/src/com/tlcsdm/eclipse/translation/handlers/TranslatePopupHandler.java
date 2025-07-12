@@ -47,27 +47,8 @@ public class TranslatePopupHandler extends AbstractHandler {
 			}
 
 			// 获取文本区域位置，计算弹窗坐标
-			int startOffset = textSelection.getOffset();
-			int length = textSelection.getLength();
-			int endOffset = startOffset + length;
-
-			int startLine = styledText.getLineAtOffset(startOffset);
-			int endLine = styledText.getLineAtOffset(endOffset);
-			int numberOfLines = endLine - startLine + 1;
-
-			// 起始字符在控件内部的位置
-			Point startLocation = styledText.getLocationAtOffset(startOffset);
-
-			// 行高（大多数等高字体里相等）
-			int lineHeight = styledText.getLineHeight(startOffset);
-			int selectionHeight = numberOfLines * lineHeight;
-
-			// 计算最终位置
-			int x = startLocation.x;
-			int y = startLocation.y + selectionHeight + 5; // 显示在选区下方偏移一点
-
-			// 转为屏幕坐标
-			Point displayLocation = styledText.toDisplay(x, y);
+			Point location = styledText.getLocationAtOffset(textSelection.getOffset());
+			Point displayLocation = styledText.toControl(location);
 
 			// 若已有弹窗，先关闭
 			if (popupShell != null && !popupShell.isDisposed()) {
@@ -86,17 +67,8 @@ public class TranslatePopupHandler extends AbstractHandler {
 			popupText.setCaret(null);
 
 			// 设置弹窗尺寸
-			popupShell.pack(); // 自动布局子控件
-
-			// 计算推荐尺寸（带最大宽高限制）
-			Point preferredSize = popupShell.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-			int maxWidth = 500;
-			int maxHeight = 300;
-			int minWidth = 300;
-			int minHeight = 100;
-
-			int width = Math.max(minWidth, Math.min(preferredSize.x, maxWidth));
-			int height = Math.max(Math.min(preferredSize.y, maxHeight), minHeight);
+			int width = 300;
+			int height = 100;
 			popupShell.setSize(width, height);
 			popupShell.setLocation(displayLocation.x, displayLocation.y + 20); // 显示在选中文本下方
 			popupShell.open();
