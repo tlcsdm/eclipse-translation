@@ -22,6 +22,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		String youdaoKeyFrom = "";
 		String tencentId = "";
 		String tencentKey = "";
+		String defaultPlatform = "baidu";
 
 		boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
 		String orgName = getWindowsOrganization();
@@ -37,6 +38,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			String encryptedTencentId = "d0PTAhGjpu0wF3x3aJlE0WvxLvYmXKS2j02fI/DkBv5ADE1J+8qttA9jzCG02z7F";
 			String encryptedTencentKey = "gQo+pcjaKpsWjbmGIAdqU2LinN4tuE1waV8CAo8a+uWQCxqeG7U/CgQ4ZVewTL5O";
 
+			defaultPlatform = "tencent";
 			appid = AesUtil.decrypt(encryptedAppid, key);
 			securityKey = AesUtil.decrypt(encryptedSecurityKey, key);
 			youdaoKey = AesUtil.decrypt(encryptedYoudaoKey, key);
@@ -46,7 +48,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		}
 
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		store.setDefault(TranslatePreferencePage.TRANSLATE_PLATFORM, "baidu");
+		store.setDefault(TranslatePreferencePage.TRANSLATE_PLATFORM, defaultPlatform);
 		store.setDefault(TranslatePreferencePage.APP_ID, appid);
 		store.setDefault(TranslatePreferencePage.SECURITY_KEY, securityKey);
 		store.setDefault(TranslatePreferencePage.YOUDAO_KEY, youdaoKey);
