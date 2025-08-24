@@ -18,7 +18,7 @@ jobs:
           java-version: 17
 
       - name: Build with Maven Tycho
-        run: mvn clean verify
+        run: mvn -B clean verify -ntp -DskipTests
 
       - name: Copy update site content to update_site/
         run: |
