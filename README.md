@@ -7,6 +7,7 @@ This plugin integrates translation capabilities into the Eclipse IDE.
 - Translate selected text via context menu or keyboard shortcut
 - Provide Translation View for translation
 - Customize and switch translation providers from the status bar
+- Support calculation of folded code regions
 - Lightweight and easy to configure
 
 ## Use
