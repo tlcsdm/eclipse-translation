@@ -47,7 +47,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.changes.outputs.changed != '0'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Update update_site with latest build artifacts
