@@ -2,6 +2,8 @@
 
 This plugin integrates translation capabilities into the Eclipse IDE.
 
+Now Support Eclipse 2024-06 and later, Mac OS X, Linux (with nautilus) and Windows.
+
 ## Features
 - Supports Baidu, Youdao, etc (requires API credentials)
 - Translate selected text via context menu or keyboard shortcut
