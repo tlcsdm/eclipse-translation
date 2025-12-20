@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: com.tlcsdm.eclipse.translation
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.tlcsdm.eclipse.translation;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: com.tlcsdm.eclipse.translation.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ui,
@@ -11,8 +11,6 @@ Require-Bundle: org.eclipse.ui,
  com.google.gson,
  org.eclipse.jface.text,
  org.eclipse.core.expressions,
- com.sun.jna,
- com.sun.jna.platform,
  org.eclipse.jdt.ui;resolution:=optional,
  org.eclipse.pde.ui;resolution:=optional,
  org.eclipse.ui.workbench.texteditor;resolution:=optional
