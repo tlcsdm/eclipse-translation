@@ -60,9 +60,7 @@ public class TranslationUtil {
 	 */
 	public static String baiduTranslate(String src, String from, String to) {
 		BaiduTranslateModel mode = new BaiduTranslateImpl().translate(src, from, to);
-		StringBuffer sb = new StringBuffer();
-		sb.append(mode.getDst());
-		return sb.toString();
+		return mode.getDst();
 	}
 
 	/**
@@ -73,9 +71,7 @@ public class TranslationUtil {
 	 */
 	public static String tencentTranslate(String src, String from, String to) {
 		TencentTranslateModel mode = new TencentTranslateImpl().translate(src, from, to);
-		StringBuffer sb = new StringBuffer();
-		sb.append(mode.getDst());
-		return sb.toString();
+		return mode.getDst();
 	}
 
 	/**

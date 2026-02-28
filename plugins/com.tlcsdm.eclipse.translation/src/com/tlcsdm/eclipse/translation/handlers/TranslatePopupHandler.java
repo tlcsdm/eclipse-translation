@@ -112,10 +112,9 @@ public class TranslatePopupHandler extends AbstractHandler {
 					display.removeFilter(SWT.MouseDown, this);
 					return;
 				}
-				if (!(e.widget instanceof Control)) {
+				if (!(e.widget instanceof Control control)) {
 					return;
 				}
-				Control control = (Control) e.widget;
 				if (!popupShell.equals(control) && !isChildOf(popupShell, control)) {
 					popupShell.dispose();
 					display.removeFilter(SWT.MouseDown, this);
@@ -139,8 +138,8 @@ public class TranslatePopupHandler extends AbstractHandler {
 
 	private ITextSelection getSelection(ExecutionEvent event) {
 		ISelection sel = HandlerUtil.getCurrentSelection(event);
-		if (sel instanceof ITextSelection) {
-			return (ITextSelection) sel;
+		if (sel instanceof ITextSelection textSel) {
+			return textSel;
 		}
 		return null;
 	}

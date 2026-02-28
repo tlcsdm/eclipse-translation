@@ -47,7 +47,7 @@ public class YoudaoTranslateModel {
 	}
 
 	public String printResult() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (Object o : translation) {
 			sb.append(o).append("\r");
 		}

@@ -1,15 +1,12 @@
 package com.tlcsdm.eclipse.translation.utils;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -21,11 +18,19 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+
+import com.tlcsdm.eclipse.translation.Activator;
+
 public class HttpGet {
 	protected static final int SOCKET_TIMEOUT = 10000; // 10S
 	protected static final String GET = "GET";
+	private static final ILog LOG = Activator.getDefault().getLog();
 
 	public static String get(String host, Map<String, String> params) {
+		HttpURLConnection conn = null;
 		try {
 			// 设置SSLContext
 			SSLContext sslcontext = SSLContext.getInstance("TLS");
@@ -33,45 +38,35 @@ public class HttpGet {
 
 			String sendUrl = getUrlWithQueryString(host, params);
 
-			// System.out.println("URL:" + sendUrl);
-
-			URL uri = new URL(sendUrl); // 创建URL对象
-			HttpURLConnection conn = (HttpURLConnection) uri.openConnection();
-			if (conn instanceof HttpsURLConnection) {
-				((HttpsURLConnection) conn).setSSLSocketFactory(sslcontext.getSocketFactory());
+			URL uri = new URL(sendUrl);
+			conn = (HttpURLConnection) uri.openConnection();
+			if (conn instanceof HttpsURLConnection httpsConn) {
+				httpsConn.setSSLSocketFactory(sslcontext.getSocketFactory());
 			}
 
-			conn.setConnectTimeout(SOCKET_TIMEOUT); // 设置相应超时
+			conn.setConnectTimeout(SOCKET_TIMEOUT);
 			conn.setRequestMethod(GET);
 			int statusCode = conn.getResponseCode();
 			if (statusCode != HttpURLConnection.HTTP_OK) {
-				System.out.println("Http错误码：" + statusCode);
+				LOG.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, "Http错误码：" + statusCode));
 			}
 
 			// 读取服务器的数据
-			InputStream is = conn.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-			StringBuilder builder = new StringBuilder();
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				builder.append(line);
+			try (BufferedReader br = new BufferedReader(
+					new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
+				StringBuilder builder = new StringBuilder();
+				String line;
+				while ((line = br.readLine()) != null) {
+					builder.append(line);
+				}
+				return builder.toString();
 			}
-
-			String text = builder.toString();
-
-			close(br); // 关闭数据流
-			close(is); // 关闭数据流
-			conn.disconnect(); // 断开连接
-
-			return text;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (KeyManagementException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+		} catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
+			LOG.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
+		} finally {
+			if (conn != null) {
+				conn.disconnect();
+			}
 		}
 
 		return null;
@@ -90,8 +85,8 @@ public class HttpGet {
 		}
 
 		int i = 0;
-		for (String key : params.keySet()) {
-			String value = params.get(key);
+		for (Map.Entry<String, String> entry : params.entrySet()) {
+			String value = entry.getValue();
 			if (value == null) { // 过滤空的key
 				continue;
 			}
@@ -100,7 +95,7 @@ public class HttpGet {
 				builder.append('&');
 			}
 
-			builder.append(key);
+			builder.append(entry.getKey());
 			builder.append('=');
 			builder.append(encode(value));
 
@@ -108,16 +103,6 @@ public class HttpGet {
 		}
 
 		return builder.toString();
-	}
-
-	protected static void close(Closeable closeable) {
-		if (closeable != null) {
-			try {
-				closeable.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	/**
@@ -130,14 +115,7 @@ public class HttpGet {
 		if (input == null) {
 			return "";
 		}
-
-		try {
-			return URLEncoder.encode(input, "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		return input;
+		return URLEncoder.encode(input, StandardCharsets.UTF_8);
 	}
 
 	private static TrustManager myX509TrustManager = new X509TrustManager() {
