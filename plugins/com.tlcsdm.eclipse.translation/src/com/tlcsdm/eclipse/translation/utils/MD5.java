@@ -70,6 +70,14 @@ public class MD5 {
 		return null;
 	}
 
+	/**
+	 * 获取输入流的MD5值
+	 * <p>
+	 * 注意：此方法不会关闭传入的 InputStream，调用者负责关闭流。
+	 * 
+	 * @param in 输入流
+	 * @return MD5值
+	 */
 	public static String md5(InputStream in) {
 		try {
 			MessageDigest messagedigest = MessageDigest.getInstance("MD5");
