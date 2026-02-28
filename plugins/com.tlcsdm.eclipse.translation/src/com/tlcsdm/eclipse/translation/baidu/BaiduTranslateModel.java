@@ -88,10 +88,14 @@ public class BaiduTranslateModel {
 
 		@SuppressWarnings("unchecked")
 		List<Map<String, String>> transResult = (List<Map<String, String>>) map.get("trans_result");
+		StringBuilder srcBuilder = new StringBuilder();
+		StringBuilder dstBuilder = new StringBuilder();
 		for (Map<String, String> item : transResult) {
-			this.src = this.src + item.get("src").toString() + "\r";
-			this.dst = this.dst + item.get("dst").toString() + "\r";
+			srcBuilder.append(item.get("src")).append("\r");
+			dstBuilder.append(item.get("dst")).append("\r");
 		}
+		this.src = srcBuilder.toString();
+		this.dst = dstBuilder.toString();
 	}
 
 }

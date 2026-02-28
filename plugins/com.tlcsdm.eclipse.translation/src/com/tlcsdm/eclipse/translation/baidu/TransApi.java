@@ -1,6 +1,5 @@
 package com.tlcsdm.eclipse.translation.baidu;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +7,7 @@ import com.tlcsdm.eclipse.translation.utils.HttpGet;
 import com.tlcsdm.eclipse.translation.utils.MD5;
 
 public class TransApi {
-	private static final String TRANS_API_HOST = "http://api.fanyi.baidu.com/api/trans/vip/translate";
+	private static final String TRANS_API_HOST = "https://api.fanyi.baidu.com/api/trans/vip/translate";
 
 	private String appid;
 	private String securityKey;
@@ -24,7 +23,7 @@ public class TransApi {
 	}
 
 	private Map<String, String> buildParams(String query, String from, String to) {
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<>();
 		params.put("q", query);
 		params.put("from", from);
 		params.put("to", to);
@@ -36,12 +35,8 @@ public class TransApi {
 		params.put("salt", salt);
 
 		// 签名
-		String src = appid + query + salt + securityKey; // 加密前的原文
-		try {
-			params.put("sign", MD5.md5(src));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		String src = appid + query + salt + securityKey;
+		params.put("sign", MD5.md5(src));
 
 		return params;
 	}

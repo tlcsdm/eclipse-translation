@@ -39,12 +39,19 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+
+import com.tlcsdm.eclipse.translation.Activator;
+
 /**
  * @author unknowIfGuestInDream
  */
 public class AesUtil {
 
 	private static final String AES = "AES";
+	private static final ILog LOG = Activator.getDefault().getLog();
 
 	/**
 	 * 使用固定的 128-bit (16字节) 密钥生成 SecretKey
@@ -69,7 +76,7 @@ public class AesUtil {
 			return new String(plainBytes, StandardCharsets.UTF_8);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException
 				| BadPaddingException e) {
-			e.printStackTrace();
+			LOG.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 		}
 		return "";
 	}

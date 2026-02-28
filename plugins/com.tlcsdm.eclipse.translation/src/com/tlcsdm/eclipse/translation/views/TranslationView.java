@@ -36,12 +36,15 @@ public class TranslationView extends ViewPart implements ModifyListener {
 
 	private final static List<Map<String, String>> mTranslationModelDataSource = new ArrayList<>();
 
-	public TranslationView() {
-		super();
+	static {
 		mTranslationModelDataSource.add(Map.of(TranslateConf.AUTO, Messages.translateConf_auto));
 		mTranslationModelDataSource.add(Map.of(TranslateConf.ZH, "中文"));
 		mTranslationModelDataSource.add(Map.of(TranslateConf.JA, "日本語"));
 		mTranslationModelDataSource.add(Map.of(TranslateConf.EN, "English"));
+	}
+
+	public TranslationView() {
+		super();
 	}
 
 	@Override

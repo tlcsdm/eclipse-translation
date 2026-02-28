@@ -10,23 +10,18 @@ import com.tlcsdm.eclipse.translation.handlers.TranslateConf;
 import com.tlcsdm.eclipse.translation.utils.HttpGet;
 
 public class YoudaoTranslateImpl implements YoudaoTranslate {
-	private static String YOUDAO_HOST = "https://openapi.youdao.com/api";
-	private Map<String, String> paramsMap = new HashMap<String, String>();
+	private static final String YOUDAO_HOST = "https://openapi.youdao.com/api";
 
 	@Override
 	public String translate(String src, String from, String to) {
-		return translate(src, from, to, paramsMap);
+		Map<String, String> paramsMap = new HashMap<>();
+		initParamsMap(src, from, to, paramsMap);
+		return HttpGet.get(YOUDAO_HOST, paramsMap);
 	}
 
 	public String translate(String src, String from, String to, Map<String, String> paramsMap) {
 		initParamsMap(src, from, to, paramsMap);
-		String str = HttpGet.get(YOUDAO_HOST, paramsMap);
-//        try {
-//            str = new String(str.getBytes(),"UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-		return str;
+		return HttpGet.get(YOUDAO_HOST, paramsMap);
 	}
 
 	public void initParamsMap(String src, String from, String to, Map<String, String> paramsMap) {

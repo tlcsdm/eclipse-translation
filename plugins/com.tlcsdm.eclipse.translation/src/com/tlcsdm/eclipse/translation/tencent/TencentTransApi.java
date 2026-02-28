@@ -18,6 +18,11 @@ import java.util.TimeZone;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+
+import com.tlcsdm.eclipse.translation.Activator;
 import com.google.gson.Gson;
 
 public class TencentTransApi {
@@ -46,7 +51,8 @@ public class TencentTransApi {
 		try {
 			result = doRequest(this.securityId, this.securityKey, SERVICE, VERSION, ACTION, body, REGION, TOKEN);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Activator.getDefault().getLog()
+					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 		}
 		return result;
 	}
