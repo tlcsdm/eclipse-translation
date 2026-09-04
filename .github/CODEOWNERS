@@ -27,6 +27,9 @@ sites/**                      @unknowIfGuestInDream
 # update_site
 update_site/**                @unknowIfGuestInDream
 
+# target-platform
+targets/**                    @unknowIfGuestInDream
+
 # Document
 LICENSE                       @unknowIfGuestInDream
 README.md                     @unknowIfGuestInDream
